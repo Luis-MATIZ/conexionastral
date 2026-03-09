@@ -1,3 +1,5 @@
+import 'package:conexion_astral/pages/pages.dart';
+import 'package:conexion_astral/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -8,11 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Material App Bar')),
-        body: const Center(child: Text('Hello World')),
-      ),
+      title: 'Conexión Astral',
+      debugShowCheckedModeBanner: false,
+      initialRoute: 'home',
+      routes: {'home': (_) => HomePage()},
+      theme: AppTheme.lightTheme,
     );
   }
 }
