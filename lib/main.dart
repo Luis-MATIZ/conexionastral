@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Conexión Astral',
       debugShowCheckedModeBanner: false,
-      initialRoute: 'home',
-      routes: {'home': (_) => HomePage()},
+      initialRoute: 'login',
+      routes: {'home': (_) => HomePage(), 'login': (_) => LoginPage()},
       theme: AppTheme.lightTheme,
     );
   }
