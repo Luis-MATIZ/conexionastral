@@ -1,4 +1,3 @@
-import 'package:conexion_astral/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class ConsejosPage extends StatelessWidget {
@@ -7,9 +6,8 @@ class ConsejosPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Conexión Astral')),
-      body: Container(),
-      bottomNavigationBar: CustomNavigationBar(),
+      body: Container(child: Text('CONSEJOS PAGE')),
+      //bottomNavigationBar: CustomNavigationBar(),
     );
   }
 }
