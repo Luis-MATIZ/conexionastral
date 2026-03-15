@@ -15,8 +15,6 @@ class BackgroundLogin extends StatelessWidget {
 }
 
 class _HeaderLogin extends StatelessWidget {
-  const _HeaderLogin({super.key});
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -32,12 +30,7 @@ class _HeaderLogin extends StatelessWidget {
       gradient: LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
-        colors: [
-          Color(0xFF1e3c72), // Azul profundo
-          Color(
-            0xFF2a5298,
-          ), // Azul medio // Gris nube (genera un contraste metálico)
-        ],
+        colors: [Color(0xFF1e3c72), Color(0xFF2a5298)],
       ),
     );
   }

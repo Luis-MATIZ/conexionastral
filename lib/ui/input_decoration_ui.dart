@@ -10,6 +10,7 @@ class InputDecorationUI {
       hintText: hintText,
       labelText: labelText,
       prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
     );
   }
 }

@@ -10,9 +10,9 @@ class CardContainer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         width: double.infinity,
-        height: 400,
+        //height: 400,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
           color: Colors.white,
@@ -21,7 +21,7 @@ class CardContainer extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Login',
+              'Bienvenido!',
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 30),
@@ -42,8 +42,7 @@ class CardContainer extends StatelessWidget {
 }
 
 class _LoginForm extends StatelessWidget {
-  _LoginForm({super.key});
-  final TextEditingController _fechaController = TextEditingController();
+  final _dateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -60,13 +59,12 @@ class _LoginForm extends StatelessWidget {
             ),
           ),
           SizedBox(height: 30),
-          CustomDialogDatePicker(
-            controller: _fechaController,
-            label: "Fecha de nacimiento",
-          ),
+          BirthDateField(controller: _dateController),
           SizedBox(height: 30),
           MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, 'home');
+            },
             disabledColor: Colors.grey,
             child: Container(
               decoration: BoxDecoration(
