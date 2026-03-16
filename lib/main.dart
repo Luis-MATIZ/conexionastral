@@ -22,6 +22,8 @@ class MyApp extends StatelessWidget {
           'login': (_) => LoginPage(),
           'consejos': (_) => ConsejosPage(),
           'rituales': (_) => RitualesPage(),
+          'settings': (_) => SettingsPage(),
+          'profile': (_) => ProfilePage(),
         },
         theme: AppTheme.lightTheme,
       ),
