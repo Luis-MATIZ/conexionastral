@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Conexión Astral')),
+      appBar: AppBar(title: Text('Conexión Astral'), centerTitle: true),
       drawer: SideMenu(),
       body: _HomePageBody(),
       bottomNavigationBar: CustomNavigationBar(),

@@ -5,5 +5,6 @@ class AppTheme {
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     //Todo: Crearemos todo el tema de la APP aquí.
+    appBarTheme: AppBarTheme(centerTitle: true),
   );
 }
