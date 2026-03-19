@@ -47,8 +47,6 @@ class SideMenu extends StatelessWidget {
 }
 
 class _DrawerHeader extends StatelessWidget {
-  const _DrawerHeader({super.key});
-
   @override
   Widget build(BuildContext context) {
     return DrawerHeader(child: Container());

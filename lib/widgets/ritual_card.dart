@@ -28,15 +28,19 @@ class RitualCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            padding: EdgeInsets.symmetric(vertical: 5),
             child: Column(
               children: [
-                Text(
-                  'Rituales #1',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'Soy un texto probando el texto del textoSoy un texto probando el texto del textoSoy un texto probando el texto del textoSoy un texto probando el texto del texto',
+                ListTile(
+                  title: Text(
+                    'Rituales #1',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    'Soy un texto probando el texto del textoSoy un texto probando el texto del textoSoy un texto probando el texto del textoSoy un texto probando el texto del texto',
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
