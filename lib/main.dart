@@ -1,4 +1,5 @@
 import 'package:conexion_astral/pages/pages.dart';
+import 'package:conexion_astral/pages/ritual_page.dart';
 import 'package:conexion_astral/providers/ui_provider.dart';
 import 'package:conexion_astral/themes/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
           'rituales': (_) => RitualesPage(),
           'settings': (_) => SettingsPage(),
           'profile': (_) => ProfilePage(),
+          'ritual': (_) => RitualPage(),
         },
         theme: AppTheme.lightTheme,
       ),

@@ -8,13 +8,17 @@ class RitualesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, int index) => GestureDetector(
-          onTap: () {
-            print('Accedineto al churumbel');
-          },
-          child: RitualCard(),
+      body: Padding(
+        padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+        child: ListView.separated(
+          itemCount: 10,
+          separatorBuilder: (context, index) => SizedBox(height: 15),
+          itemBuilder: (context, int index) => GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, 'ritual');
+            },
+            child: RitualCard(),
+          ),
         ),
       ),
     );
