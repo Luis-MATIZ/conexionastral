@@ -1,5 +1,5 @@
-import 'package:conexion_astral/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:conexion_astral/widgets/widgets.dart';
 import 'package:conexion_astral/ui/ui.dart';
 
 class CardContainer extends StatelessWidget {

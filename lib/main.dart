@@ -1,8 +1,8 @@
-import 'package:conexion_astral/pages/pages.dart';
-import 'package:conexion_astral/pages/ritual_page.dart';
-import 'package:conexion_astral/providers/ui_provider.dart';
-import 'package:conexion_astral/themes/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:conexion_astral/pages/pages.dart';
+import 'package:conexion_astral/providers/ui_provider.dart';
+import 'package:conexion_astral/services/rituales_service.dart';
+import 'package:conexion_astral/themes/app_theme.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(const MyApp());
@@ -13,7 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => UiProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => UiProvider()),
+        ChangeNotifierProvider(create: (_) => RitualesService()),
+      ],
       child: MaterialApp(
         title: 'Conexión Astral',
         debugShowCheckedModeBanner: false,

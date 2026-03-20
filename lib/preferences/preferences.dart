@@ -4,7 +4,7 @@ class Preferences {
   static late SharedPreferences _prefs;
   static String _name = '';
   static bool _isDarkMode = false;
-  static String _fecha_nacimiento = '';
+  static String _nacimiento = '';
 
   static Future init() async {
     _prefs = await SharedPreferences.getInstance();
@@ -19,13 +19,13 @@ class Preferences {
     _prefs.setString('name', name);
   }
 
-  static String get fecha_nacimiento {
-    return _prefs.getString('fecha_nacimiento') ?? _fecha_nacimiento;
+  static String get nacimiento {
+    return _prefs.getString('nacimiento') ?? _nacimiento;
   }
 
-  static set fecha_nacimiento(String fecha) {
-    _fecha_nacimiento = fecha;
-    _prefs.setString('fecha_nacimiento', fecha_nacimiento);
+  static set nacimiento(String fecha) {
+    _nacimiento = fecha;
+    _prefs.setString('nacimiento', _nacimiento);
   }
 
   static bool get isDarkMode {

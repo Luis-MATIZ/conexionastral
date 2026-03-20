@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:conexion_astral/models/ritual.dart';
 
 class RitualCard extends StatelessWidget {
-  const RitualCard({super.key});
+  final Ritual ritual;
+  const RitualCard({super.key, required this.ritual});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,7 @@ class RitualCard extends StatelessWidget {
               topRight: Radius.circular(18),
             ),
             child: FadeInImage(
-              image: NetworkImage(
-                'https://tvazteca.brightspotcdn.com/73/bd/ba985edb423fa5296304efac8a3b/rituales-signos.jpg',
-              ),
+              image: NetworkImage(ritual.picture),
               placeholder: AssetImage('assets/images/jar-loading.gif'),
               width: double.infinity,
               height: 230,
@@ -33,11 +33,11 @@ class RitualCard extends StatelessWidget {
               children: [
                 ListTile(
                   title: Text(
-                    'Rituales #1',
+                    ritual.title,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
-                    'Soy un texto probando el texto del textoSoy un texto probando el texto del textoSoy un texto probando el texto del textoSoy un texto probando el texto del texto',
+                    ritual.description,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
