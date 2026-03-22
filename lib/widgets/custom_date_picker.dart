@@ -1,3 +1,4 @@
+import 'package:conexion_astral/preferences/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -55,6 +56,7 @@ class BirthDateField extends StatelessWidget {
     if (picked != null) {
       // Formateo profesional usando la librería intl
       controller.text = DateFormat('dd/MM/yyyy').format(picked);
+      Preferences.nacimiento = picked.toString();
     }
   }
 }

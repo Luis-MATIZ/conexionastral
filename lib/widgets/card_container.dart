@@ -1,3 +1,4 @@
+import 'package:conexion_astral/preferences/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:conexion_astral/widgets/widgets.dart';
 import 'package:conexion_astral/ui/ui.dart';
@@ -57,6 +58,9 @@ class _LoginForm extends StatelessWidget {
               hintText: 'Escriba su nombre',
               labelText: 'Nombre de usuario',
             ),
+            onChanged: (value) {
+              Preferences.name = value;
+            },
           ),
           SizedBox(height: 30),
           BirthDateField(controller: _dateController),

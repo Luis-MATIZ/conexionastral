@@ -1,3 +1,4 @@
+import 'package:conexion_astral/preferences/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:conexion_astral/services/consejos_service.dart';
 import 'package:conexion_astral/pages/pages.dart';
@@ -6,7 +7,11 @@ import 'package:conexion_astral/services/rituales_service.dart';
 import 'package:conexion_astral/themes/app_theme.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Preferences.init();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -22,7 +27,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Conexión Astral',
         debugShowCheckedModeBanner: false,
-        initialRoute: 'login',
+        initialRoute: Preferences.name == '' ? 'login' : 'home',
         routes: {
           'home': (_) => HomePage(),
           'login': (_) => LoginPage(),

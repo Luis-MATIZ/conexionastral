@@ -1,3 +1,4 @@
+import 'package:conexion_astral/preferences/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:conexion_astral/providers/ui_provider.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,8 @@ class SideMenu extends StatelessWidget {
             title: Text('Desconectarse'),
             onTap: () {
               Navigator.pushReplacementNamed(context, 'login');
+              Preferences.name = '';
+              Preferences.nacimiento = '';
             },
           ),
         ],
