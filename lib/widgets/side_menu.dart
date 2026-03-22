@@ -49,6 +49,14 @@ class SideMenu extends StatelessWidget {
 class _DrawerHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return DrawerHeader(child: Container());
+    return DrawerHeader(
+      decoration: BoxDecoration(
+        color: Color(0xFF2a5298),
+        image: DecorationImage(
+          image: AssetImage('assets/images/logo_inside.png'),
+        ),
+      ),
+      child: Container(),
+    );
   }
 }

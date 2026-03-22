@@ -25,7 +25,6 @@ class RitualesService extends ChangeNotifier {
     if (resp.body == 'null') {
       isLoading = false;
       notifyListeners();
-      print('Vamos muy mal');
       return [];
     }
 

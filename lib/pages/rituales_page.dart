@@ -10,7 +10,6 @@ class RitualesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ritualesService = Provider.of<RitualesService>(context);
-    print(ritualesService.rituales.length);
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(top: 20, left: 10, right: 10),
