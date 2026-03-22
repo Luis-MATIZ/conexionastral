@@ -19,25 +19,32 @@ class ConsejosService extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    final url = Uri.https(_baseUrl, 'consejos.json');
-    final resp = await http.get(url);
+    try {
+      final url = Uri.https(_baseUrl, 'consejos.json');
+      final resp = await http.get(url).timeout(const Duration(seconds: 10));
 
-    if (resp.body == 'null') {
+      if (resp.body == 'null') {
+        consejos.clear();
+        isLoading = false;
+        notifyListeners();
+        return [];
+      }
+
+      final Map<String, dynamic> consejosMap = json.decode(resp.body);
+      consejos.clear();
+
+      consejosMap.forEach((key, value) {
+        final tempConsejo = Consejo.fromJson(value);
+        tempConsejo.id = key;
+        consejos.add(tempConsejo);
+      });
+    } catch (e) {
+      consejos.clear();
+    } finally {
       isLoading = false;
       notifyListeners();
-      return [];
     }
 
-    final Map<String, dynamic> consejosMap = json.decode(resp.body);
-    consejos.clear();
-
-    consejosMap.forEach((key, value) {
-      final tempConsejo = Consejo.fromJson(value);
-      tempConsejo.id = key;
-      consejos.add(tempConsejo);
-    });
-    isLoading = false;
-    notifyListeners();
     return consejos;
   }
 }
