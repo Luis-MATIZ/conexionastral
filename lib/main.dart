@@ -1,5 +1,5 @@
-import 'package:conexion_astral/services/consejos_service.dart';
 import 'package:flutter/material.dart';
+import 'package:conexion_astral/services/consejos_service.dart';
 import 'package:conexion_astral/pages/pages.dart';
 import 'package:conexion_astral/providers/ui_provider.dart';
 import 'package:conexion_astral/services/rituales_service.dart';
