@@ -1,3 +1,4 @@
+import 'package:conexion_astral/services/consejos_service.dart';
 import 'package:flutter/material.dart';
 import 'package:conexion_astral/pages/pages.dart';
 import 'package:conexion_astral/providers/ui_provider.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => UiProvider()),
         ChangeNotifierProvider(create: (_) => RitualesService()),
+        ChangeNotifierProvider(create: (_) => ConsejosService()),
       ],
       child: MaterialApp(
         title: 'Conexión Astral',
@@ -29,6 +31,7 @@ class MyApp extends StatelessWidget {
           'settings': (_) => SettingsPage(),
           'profile': (_) => ProfilePage(),
           'ritual': (_) => RitualPage(),
+          'consejo': (_) => ConsejoPage(),
         },
         theme: AppTheme.lightTheme,
       ),
