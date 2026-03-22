@@ -1,17 +1,17 @@
 import 'package:conexion_astral/preferences/preferences.dart';
 import 'package:flutter/material.dart';
-// Importa tus preferencias para leer los datos reales
-// import 'package:conexion_astral/preferences/preferences.dart';
+import 'package:intl/intl.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // Simulamos los datos (Aquí usarías Preferences.nombre y Preferences.nacimiento)
-    final String nombreUsuario = "Luis";
-    final String fechaNacimiento = "1994-05-04";
+  State<ProfilePage> createState() => _ProfilePageState();
+}
 
+class _ProfilePageState extends State<ProfilePage> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5FA),
       body: SingleChildScrollView(
@@ -21,13 +21,15 @@ class ProfilePage extends StatelessWidget {
 
             const CircleAvatar(
               radius: 50,
-              backgroundColor: Colors.indigo,
+              backgroundColor: Color(0xFF2a5298),
               child: Icon(Icons.person_outline, size: 50, color: Colors.white),
             ),
             const SizedBox(height: 15),
 
             Text(
               Preferences.name.toUpperCase(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -36,7 +38,6 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 30),
 
-            // --- TARJETA DE INFORMACIÓN ---
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Container(
@@ -57,12 +58,14 @@ class ProfilePage extends StatelessWidget {
                       icon: Icons.person,
                       label: "Nombre:",
                       value: Preferences.name,
+                      onEdit: () => _showEditNameDialog(context),
                     ),
                     const Divider(height: 1, indent: 60),
                     _ProfileTile(
                       icon: Icons.cake,
                       label: "Fecha de nacimiento:",
                       value: Preferences.nacimiento,
+                      onEdit: () => _showEditDateDialog(context),
                     ),
                     const Divider(height: 1, indent: 60),
                     _ProfileTile(
@@ -85,18 +88,112 @@ class ProfilePage extends StatelessWidget {
       ),
     );
   }
+
+  void _showEditNameDialog(BuildContext context) {
+    final textController = TextEditingController(text: Preferences.name);
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Editar Nombre'),
+        content: TextField(controller: textController),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () {
+              Preferences.name = textController.text;
+              setState(() {});
+              Navigator.pop(context);
+            },
+            child: const Text('Guardar'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _showEditDateDialog(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now().subtract(const Duration(days: 6570)),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(primary: Color(0xFF2a5298)),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null) {
+      Preferences.nacimiento = DateFormat('yyyy-MM-dd').format(picked);
+
+      int day = picked.day;
+      int month = picked.month;
+      String nuevoSigno = "";
+
+      switch (month) {
+        case 1:
+          nuevoSigno = (day <= 19) ? "Capricornio" : "Acuario";
+          break;
+        case 2:
+          nuevoSigno = (day <= 18) ? "Acuario" : "Piscis";
+          break;
+        case 3:
+          nuevoSigno = (day <= 20) ? "Piscis" : "Aries";
+          break;
+        case 4:
+          nuevoSigno = (day <= 19) ? "Aries" : "Tauro";
+          break;
+        case 5:
+          nuevoSigno = (day <= 20) ? "Tauro" : "Géminis";
+          break;
+        case 6:
+          nuevoSigno = (day <= 20) ? "Géminis" : "Cáncer";
+          break;
+        case 7:
+          nuevoSigno = (day <= 22) ? "Cáncer" : "Leo";
+          break;
+        case 8:
+          nuevoSigno = (day <= 22) ? "Leo" : "Virgo";
+          break;
+        case 9:
+          nuevoSigno = (day <= 22) ? "Virgo" : "Libra";
+          break;
+        case 10:
+          nuevoSigno = (day <= 22) ? "Libra" : "Escorpio";
+          break;
+        case 11:
+          nuevoSigno = (day <= 21) ? "Escorpio" : "Sagitario";
+          break;
+        case 12:
+          nuevoSigno = (day <= 21) ? "Sagitario" : "Capricornio";
+          break;
+      }
+
+      Preferences.signo = nuevoSigno;
+
+      setState(() {});
+    }
+  }
 }
 
-// Widget auxiliar para las filas del perfil
 class _ProfileTile extends StatelessWidget {
   final IconData icon;
   final String label;
   final String value;
+  final VoidCallback? onEdit; // Nueva propiedad opcional
 
   const _ProfileTile({
     required this.icon,
     required this.label,
     required this.value,
+    this.onEdit,
   });
 
   @override
@@ -105,27 +202,27 @@ class _ProfileTile extends StatelessWidget {
       leading: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.indigo.withOpacity(0.1),
+          color: Color(0xFF2a5298),
           shape: BoxShape.circle,
         ),
-        child: Icon(icon, color: Colors.indigo, size: 20),
+        child: Icon(icon, color: Colors.white, size: 20),
       ),
       title: Text(
         label,
-        style: const TextStyle(
-          fontSize: 12,
-          color: Colors.grey,
-          fontWeight: FontWeight.w500,
-        ),
+        style: const TextStyle(fontSize: 12, color: Colors.grey),
       ),
       subtitle: Text(
         value,
-        style: const TextStyle(
-          fontSize: 16,
-          color: Colors.black87,
-          fontWeight: FontWeight.bold,
-        ),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
+      trailing: onEdit != null
+          ? IconButton(
+              icon: const Icon(Icons.edit_outlined, size: 20),
+              onPressed: onEdit,
+            )
+          : null,
     );
   }
 }

@@ -16,6 +16,7 @@ class RitualesPage extends StatelessWidget {
         child: ritualesService.isLoading == true
             ? const Center(child: CircularProgressIndicator())
             : ListView.separated(
+                padding: const EdgeInsets.only(bottom: 50),
                 itemCount: ritualesService.rituales.length,
                 separatorBuilder: (context, index) => SizedBox(height: 15),
                 itemBuilder: (context, int index) => GestureDetector(
