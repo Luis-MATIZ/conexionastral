@@ -5,6 +5,7 @@ class Preferences {
   static String _name = '';
   static bool _isDarkMode = false;
   static String _nacimiento = '';
+  static String _signo = '';
 
   static Future init() async {
     _prefs = await SharedPreferences.getInstance();
@@ -17,6 +18,15 @@ class Preferences {
   static set name(String name) {
     _name = name;
     _prefs.setString('name', name);
+  }
+
+  static String get signo {
+    return _prefs.getString('signo') ?? _signo;
+  }
+
+  static set signo(String signo) {
+    _signo = signo;
+    _prefs.setString('signo', signo);
   }
 
   static String get nacimiento {

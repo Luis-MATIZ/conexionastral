@@ -2,7 +2,7 @@ import 'package:conexion_astral/preferences/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../ui/input_decoration_ui.dart'; // Recuerda añadir 'intl' en tu pubspec.yaml
+import '../ui/input_decoration_ui.dart';
 
 class BirthDateField extends StatelessWidget {
   final TextEditingController controller;
@@ -18,11 +18,11 @@ class BirthDateField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      readOnly: true, // Crucial: evita el teclado físico
+      readOnly: true,
       decoration: InputDecorationUI.authInputDecoration(
         labelText: label,
         prefixIcon: Icons.calendar_month,
-        hintText: 'Escriba su fecha de nacimiento',
+        hintText: 'Seleccione su fecha de nacimiento',
       ),
       onTap: () => _selectDate(context),
       validator: (value) {
@@ -35,12 +35,10 @@ class BirthDateField extends StatelessWidget {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now().subtract(
-        const Duration(days: 6570),
-      ), // Default 18 años
+      //locale: const Locale('es', 'ES'),
+      initialDate: DateTime.now().subtract(const Duration(days: 6570)),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
-      // Personalización opcional del tema del calendario
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
@@ -54,9 +52,53 @@ class BirthDateField extends StatelessWidget {
     );
 
     if (picked != null) {
-      // Formateo profesional usando la librería intl
       controller.text = DateFormat('dd/MM/yyyy').format(picked);
-      Preferences.nacimiento = picked.toString();
+      Preferences.nacimiento = DateFormat('yyyy-MM-dd').format(picked);
+
+      int day = picked.day;
+      int month = picked.month;
+      String signo = "";
+
+      switch (month) {
+        case 1:
+          signo = (day <= 19) ? "Capricornio" : "Acuario";
+          break;
+        case 2:
+          signo = (day <= 18) ? "Acuario" : "Piscis";
+          break;
+        case 3:
+          signo = (day <= 20) ? "Piscis" : "Aries";
+          break;
+        case 4:
+          signo = (day <= 19) ? "Aries" : "Tauro";
+          break;
+        case 5:
+          signo = (day <= 20) ? "Tauro" : "Géminis";
+          break;
+        case 6:
+          signo = (day <= 20) ? "Géminis" : "Cáncer";
+          break;
+        case 7:
+          signo = (day <= 22) ? "Cáncer" : "Leo";
+          break;
+        case 8:
+          signo = (day <= 22) ? "Leo" : "Virgo";
+          break;
+        case 9:
+          signo = (day <= 22) ? "Virgo" : "Libra";
+          break;
+        case 10:
+          signo = (day <= 22) ? "Libra" : "Escorpio";
+          break;
+        case 11:
+          signo = (day <= 21) ? "Escorpio" : "Sagitario";
+          break;
+        case 12:
+          signo = (day <= 21) ? "Sagitario" : "Capricornio";
+          break;
+      }
+
+      Preferences.signo = signo;
     }
   }
 }

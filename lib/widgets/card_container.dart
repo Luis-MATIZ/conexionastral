@@ -44,10 +44,12 @@ class CardContainer extends StatelessWidget {
 
 class _LoginForm extends StatelessWidget {
   final _dateController = TextEditingController();
+  final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: myFormKey,
       child: Column(
         children: [
           TextFormField(
@@ -56,8 +58,13 @@ class _LoginForm extends StatelessWidget {
             decoration: InputDecorationUI.authInputDecoration(
               prefixIcon: Icons.person,
               hintText: 'Escriba su nombre',
-              labelText: 'Nombre de usuario',
+              labelText: 'Nombre completo',
             ),
+            validator: (value) {
+              return (value != null && value.length >= 3)
+                  ? null
+                  : 'El nombre debe tener al menos 3 caracteres';
+            },
             onChanged: (value) {
               Preferences.name = value;
             },
@@ -67,7 +74,9 @@ class _LoginForm extends StatelessWidget {
           SizedBox(height: 30),
           MaterialButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, 'home');
+              if (myFormKey.currentState?.validate() ?? false) {
+                Navigator.pushReplacementNamed(context, 'home');
+              }
             },
             disabledColor: Colors.grey,
             child: Container(
